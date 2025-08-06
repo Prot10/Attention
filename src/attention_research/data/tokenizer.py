@@ -29,7 +29,7 @@ def create_tokenizer(config: Config) -> Tokenizer:
     """
     tokenizer_config = config.get_dataset_config()
     vocab_size = config.get("tokenizer.vocab_size", 32000)
-    special_tokens = config.get("tokenizer.special_tokens", ["<pad>", "<unk>", "<s>", "</s>"])
+    special_tokens = list(config.get("tokenizer.special_tokens", ["<pad>", "<unk>", "<s>", "</s>"]))
     save_path = Path(config.get("tokenizer.save_path", "./data/tokenizer"))
 
     # Check if tokenizer already exists

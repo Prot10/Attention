@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 from torch.testing import assert_close
 
-from src.attention_research.models.torch.attention import (
+from attention_research.models.torch.attention import (
     MultiHeadAttention,
     VanillaAttention,
 )
