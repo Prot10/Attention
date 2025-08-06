@@ -70,7 +70,10 @@ dev = [
 # template = ["py.typed"]
 
 [tool.ruff]
-lint.select = [ # See https://docs.astral.sh/ruff/rules/
+line-length = 120
+
+[tool.ruff.lint]
+select = [ # See https://docs.astral.sh/ruff/rules/
   "F",    # flake8 (pyflakes)
   "E",    # pycodestyle errors
   "W",    # pycodestyle warnings
@@ -108,11 +111,17 @@ lint.select = [ # See https://docs.astral.sh/ruff/rules/
   "LOG",  # flake8-logging
   "RUF",  # ruff-specific rules
 ]
-line-length = 120
-pydocstyle.convention = "numpy"
-flake8-pytest-style.fixture-parentheses = false
-flake8-pytest-style.mark-parentheses = false
-per-file-ignores."tests/**/*.py" = ["S101", "SLF", "INP"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.flake8-pytest-style]
+fixture-parentheses = false
+mark-parentheses = false
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101", "SLF", "INP"]
+"scripts/**/*.py" = ["INP001", "T20"]
 
 [tool.mypy]
 python_version = "3.11"
