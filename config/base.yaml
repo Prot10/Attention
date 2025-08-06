@@ -1,0 +1,75 @@
+# Base configuration for Attention Mechanisms Research
+# Framework selection: 'torch' or 'jax'
+framework: torch
+
+# Dataset configuration
+dataset:
+  name: "Salesforce/wikitext"
+  subset: "wikitext-103-raw-v1"
+  split: "train"
+  validation_split: "validation"
+  test_split: "test"
+  cache_dir: "./data/cache"
+
+# Tokenizer configuration
+tokenizer:
+  type: "custom"  # We'll train our own
+  vocab_size: 32000
+  special_tokens: ["<pad>", "<unk>", "<s>", "</s>"]
+  save_path: "./data/tokenizer"
+
+# Model configuration - shared across all attention mechanisms
+model:
+  # Architecture
+  vocab_size: 32000
+  hidden_size: 512
+  num_layers: 6
+  num_heads: 8
+  intermediate_size: 2048
+  max_sequence_length: 1024
+  dropout: 0.1
+  layer_norm_eps: 1e-5
+
+  # Attention mechanism to use
+  attention_type: "vanilla"  # Options: vanilla, multi_head, flash, linear, performer, longformer
+
+# Training configuration
+training:
+  batch_size: 32
+  learning_rate: 5e-4
+  weight_decay: 0.01
+  warmup_steps: 1000
+  max_steps: 50000
+  gradient_clip_norm: 1.0
+  eval_every: 1000
+  save_every: 5000
+  seed: 42
+
+# Hardware configuration
+hardware:
+  device: "cuda"  # cuda, cpu
+  mixed_precision: true
+  compile_model: true  # Use torch.compile for PyTorch 2.0+
+
+# Profiling and benchmarking
+profiling:
+  enabled: true
+  profile_memory: true
+  profile_kernels: true
+  trace_activities: ["cpu", "cuda"]
+  record_shapes: true
+  with_stack: true
+
+# Logging and output
+logging:
+  level: "INFO"
+  log_dir: "./logs"
+  experiment_name: "attention_comparison"
+  use_wandb: true
+  wandb_project: "attention-mechanisms"
+
+# Paths
+paths:
+  model_save_dir: "./models"
+  results_dir: "./results"
+  checkpoints_dir: "./checkpoints"
