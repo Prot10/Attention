@@ -27,8 +27,7 @@ Key benefits:
 - Interpretable attention weights
 - No sequential computation bottleneck
 
-This implementation uses torch.einsum for efficient tensor operations and includes
-educational comments to help understand each step of the computation.
+This implementation uses torch.einsum for efficient tensor operations.
 
 References
 ----------
