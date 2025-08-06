@@ -1,0 +1,50 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: no-commit-to-branch
+        args: [--branch, master, --branch, main]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.10
+    hooks:
+      - id: ruff # linter
+        types_or: [python, pyi, jupyter]
+        args: [--fix]
+      - id: ruff-format # formatter
+        types_or: [python, pyi, jupyter]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.15.0
+    hooks:
+      - id: mypy
+        files: ^src/
+        entry: uv run mypy
+        language: system
+        args: ["--install-types", "--non-interactive"]
+
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.8.1
+    hooks:
+      - id: nbstripout
+
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 0.7.22
+    hooks:
+      - id: mdformat
+        additional_dependencies:
+          - mdformat-gfm
+          - mdformat-black
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.7.4
+    hooks:
+      - id: uv-lock
+        always_run: true
